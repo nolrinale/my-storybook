@@ -1,16 +1,16 @@
 import { css, unsafeCSS } from 'lit';
 import BXDropdown from '@carbon/web-components/es/components/dropdown/dropdown';
 import '@carbon/web-components/es/components/dropdown/dropdown-item';
-import stylesheet from './dropdown.scss?inline';
+import './dropdown.scss';
 
-class MyDropdown extends BXDropdown {}
+class MyDropdown extends BXDropdown {
+    constructor () {
+        super();
+        this.classList.add("asdf");
+    }
 
+}
 
-MyDropdown.styles = [
-  BXDropdown.styles,
-  css`
-  ${stylesheet}
-  `,
-];
 
 customElements.define('my-dropdown', MyDropdown);
+

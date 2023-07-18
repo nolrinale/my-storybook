@@ -5,12 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit</title>
-    <link rel="stylesheet" href="./src/index.css" />
+    <link rel="stylesheet" href="./src/theme.scss" />
     <script type="module" src="/src/my-element.js"></script>
+    <script type="module" src="/src/stories/Dropdown.js"></script>
   </head>
   <body>
     <my-element>
       <h1>Vite + Lit</h1>
     </my-element>
+    <hr/>
+    <my-dropdown size="lg" helper-text="Helper Text" label-text="Label Text" value="bar">
+      <bx-dropdown-item value="foo" disabled>Foo</bx-dropdown-item>
+      <bx-dropdown-item value="bar">Bar</bx-dropdown-item>
+      <bx-dropdown-item value="baz">Baz</bx-dropdown-item>
+    </my-dropdown>
+
   </body>
 </html>
