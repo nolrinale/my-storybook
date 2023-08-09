@@ -2,47 +2,53 @@ import BXCheckbox from '@carbon/web-components/es/components/checkbox/checkbox';
 import { css } from 'lit';
 
 
-// attributes must be always lowercase
-
 class MyCheckbox extends BXCheckbox {
-  //static get observedAttributes() { return ['invalidcheckbox']; }
   constructor() {
     super();
-    this.invalidCheckbox = "invalidcheckbox";
-    this._timerInterval;
+    this.invalid = false;
   }
 
-get invalidCheckProperty() {
-  return this.hasAttribute(this.invalidCheckbox);
-}
-
-connectedCallback() {
-  super.connectedCallback(); //carbon holy grail
-  if(this.invalidCheckProperty === true) {
-    this.classList.add("bx--checkbox-invalid");
-  }else{
-    this.classList.remove("bx--checkbox-invalid");
+  get invalidCheckProperty() {
+    return this.hasAttribute("invalid");
   }
-}
 
-//need to inherit the carbon events pipeline somehow
-/*
-attributeChangedCallback(name, oldValue, newValue) {
-  console.log('Custom square element attributes changed.');
-  this.updateStyles();
-}
-*/
+  connectedCallback() {
+    //Carbon events
+    super.connectedCallback();
 
+    //on first run we apply the invalid styles if needed
+    if (this.invalidCheckProperty === true) {
+      this.classList.add("bx--checkbox-invalid");
+    } else {
+      this.classList.remove("bx--checkbox-invalid");
+    }
 
-updateStyles(){
-  if(this.invalidCheckProperty === true) {
-    console.log('yes');
-    this.classList.add("bx--checkbox-invalid");
-  }else{
-    console.log('no');
-    this.classList.remove("bx--checkbox-invalid");
+    //then we create an observer instance filtering only the 'invalid' status to avoid collision with Carbon events
+    //reference: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe
+    var target = document.querySelector("sdss-checkbox");
+      const observerForInvalid = new MutationObserver(function (mutation) {
+        if (mutation[0].oldValue === null) {
+          target.classList.add("bx--checkbox-invalid");
+        } else {
+          target.classList.remove("bx--checkbox-invalid");
+        }
+      }),
+      // we configure the observer to watch changes only for the 'invalid' attribute
+      config = {
+        attributes: true,
+        attributeOldValue: true,
+        attributeFilter: ["invalid"],
+      };
+    // attach observer
+    observerForInvalid.observe(target, config);
   }
-}
+
+  disconnectedCallback() {
+    //Carbon events
+    super.disconnectedCallback();
+    //we detach the observer on destroy
+    observerForInvalid.disconnect();
+  }
 
 }
 
@@ -79,6 +85,11 @@ MyCheckbox.styles = [
 
     :host(sdss-checkbox.bx--checkbox-invalid) .bx--checkbox-label::after{
       border-color:#E50041;
+    }
+
+    :host(sdss-checkbox.bx--checkbox-invalid) .bx--checkbox:focus + .bx--checkbox-label::before {
+      outline: none;
+      box-shadow: 0px 0px 4px 3px #4EC3CD;
     }
 
     .bx--checkbox-label:hover::before {
@@ -136,7 +147,7 @@ MyCheckbox.styles = [
       height:32px;
     }
 
-    .bx--checkbox:checked:disabled + .bx--checkbox-label::before, .bx--checkbox:indeterminate:disabled + .bx--checkbox-label::before {
+    .bx--checkbox:checked:disabled + .bx--checkbox-label::before, .bx--checkbox:checked:disabled + .bx--checkbox-label::before, .bx--checkbox:indeterminate:disabled + .bx--checkbox-label::before {
       border-color: #B3B3B3;
       background-color: #FFFFFF;
     }
