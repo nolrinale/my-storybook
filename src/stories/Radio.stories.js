@@ -1,12 +1,25 @@
 import '@carbon/web-components/es/components/radio-button/radio-button-group';
 import '@carbon/web-components/es/components/radio-button/radio-button';
 import { html } from 'lit';
-import './Radio.js';
 import './helper-text.js';
-import './Radio-clear.js';
+import './Radio.js';
 
 export default {
     title: "Carbon/Radio",
+    argTypes: {
+      invalid: {
+        control: { type: 'boolean' },
+      },
+      errorText: {
+        control: { type: 'text'},
+      },
+      horizontalAlign: {
+        control: { type: 'boolean'},
+      }
+    },
+    args: {
+      errorText: "This is an Error!",
+    }
 }
 
 export const DefaultCARBON = () => html`
@@ -17,33 +30,57 @@ export const DefaultCARBON = () => html`
 </bx-radio-button-group>
 `
 
-export const DefaultMY = () => html`
-<my-radio-button-group>
-<my-radio-button>Radio 1</my-radio-button>
-<my-helper-text display error>Helper Text</my-helper-text>
-<my-radio-button>Radio 2</my-radio-button>
-<my-helper-text display error>Helper Text</my-helper-text>
-<my-radio-button>Radio 3</my-radio-button>
-<my-helper-text display error>Helper Text</my-helper-text>
-</my-radio-button-group>
+export const DefaultCarbonStatic = () => html`
+<fieldset class="bx--fieldset">
+	<legend class="bx--label">Radio button label</legend>
+	<div class="bx--form-item">
+		<div class="bx--radio-button-group ">
+			<div class="bx--radio-button-wrapper">
+				<input id="radio-button-ka60q97rt-1" class="bx--radio-button" type="radio" value="red" name="radio-button" tabindex="0" checked>
+				<label for="radio-button-ka60q97rt-1" class="bx--radio-button__label">
+            <span class="bx--radio-button__appearance"></span>
+            <span class="bx--radio-button__label-text">Radio button label</span>
+          </label>
+			</div>
+			<div class="bx--radio-button-wrapper">
+				<input id="radio-button-ka60q97rt-2" class="bx--radio-button" type="radio" value="green" name="radio-button" tabindex="0">
+				<label for="radio-button-ka60q97rt-2" class="bx--radio-button__label">
+            <span class="bx--radio-button__appearance"></span>
+            <span class="bx--radio-button__label-text">Radio button label</span>
+          </label>
+			</div>
+			<div class="bx--radio-button-wrapper">
+				<input id="radio-button-ka60q97rt-3" class="bx--radio-button" type="radio" value="blue" name="radio-button" tabindex="0" disabled>
+				<label for="radio-button-ka60q97rt-3" class="bx--radio-button__label">
+            <span class="bx--radio-button__appearance"></span>
+            <span class="bx--radio-button__label-text">Radio button label</span>
+          </label>
+			</div>
+		</div>
+	</div>
+</fieldset>
 `
 
-export const DefaultCLEAR = () => html`
+export const DefaultMyRadio = (args) => html`
 
-<form>
-  <fieldset>
-    <legend>Please select your preferred contact method:</legend>
-    <div>
-    <clear-radio-button name="contact" value="YELLOW">Yellow Value</clear-radio-button>
-    <clear-radio-button name="contact" value="GREEN">Green Value</clear-radio-button>
-    <clear-radio-button name="contact" value="BLUE">Blue Value</clear-radio-button>
-    </div>
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-  </fieldset>
-</form>
-<pre id="log"></pre>
+<div class="story-container" style="display:flex;flex-direction:${args.horizontalAlign ? 'row' : 'column'}">
+
+    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
+      <input slot="input" type="radio" name="radio" value="YELLOW">
+      <label slot="label">Label Text Yellow</label>
+    </my-radio>
+    
+    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
+      <input slot="input" type="radio" name="radio" value="GREEN">
+      <label slot="label">Label Text Green</label>
+    </my-radio>
+
+    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
+    <input slot="input" type="radio" name="radio" value="BLUE">
+    <label slot="label">Label Text Blue</label>
+  </my-radio>
+
+</div>
 
 
 `

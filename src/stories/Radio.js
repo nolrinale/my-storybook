@@ -1,133 +1,142 @@
 import BXRadioButtonGroup from '@carbon/web-components/es/components/radio-button/radio-button-group';
 import BXRadioButton from '@carbon/web-components/es/components/radio-button/radio-button';
-import { css } from 'lit';
+import './helper-text';
+import { LitElement, css, html } from 'lit';
 
 
-class MyRadioButton extends BXRadioButton {
+export class MyRadio extends LitElement {
+
+  static formAssociated = true;
+
+
+  static properties = {
+    id: { type: String, reflect: false },
+    name: {type: String, reflect: true },
+    value: {type: String, reflect: true },
+    label: {type: String, reflect: true },
+    errorText: {type: String, reflect: false },
+    invalid: { type: Boolean, reflect: false },
+  };
+
   constructor() {
     super();
+    this.internals_ = this.attachInternals();
+    this.id = self.crypto.randomUUID();
+    this.name = "";
+    this.value = "";
+    this.label = "";
+    this.errorText = "";
     this.invalid = false;
+    this.checked = false;
   }
 
-  get invalidCheckProperty() {
-    return this.hasAttribute("invalid");
-  }
+  static get styles() {
+    return css`
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.invalidCheckProperty === true) {
-      this.classList.add("bx--radio-invalid");
-    } else {
-      this.classList.remove("bx--radio-invalid");
-    }
-    //apply invalid styles only to the first element with the invalid attr 
-    var target = document.querySelector("sdss-radio-button");
-      const observerForInvalid = new MutationObserver(function (mutation) {
-        if (mutation[0].oldValue === null) {
-          target.classList.add("bx--radio-invalid");
-        } else {
-          target.classList.remove("bx--radio-invalid");
-        }
-      }),
-      config = {
-        attributes: true,
-        attributeOldValue: true,
-        attributeFilter: ["invalid"],
-      };
-        observerForInvalid.observe(target, config);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    observerForInvalid.disconnect();
-  }
+:root {
+  --form-control-color: rebeccapurple;
 }
 
-MyRadioButton.styles = [
-  BXRadioButton.styles,
-  css`
-    .bx--radio-button__label {
-      font-family: Inter, sans-serif;
-      font-size:1rem;
-      margin-bottom: 1rem;
-      margin-right: var(--otd-spacing-lg, 32px);
-    }
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
-    :host(sdss-radio-button[disabled]) .bx--radio-button__label {
-      color: #B3B3B3;
-    }
-
-    .bx--radio-button__appearance {
-      border: 2px solid #046080;
-      width:24px;
-      height:24px;
-      margin:0px;
-      margin-right: 1rem;
-    }
-
-    .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance {
-      border-color: #034D66;
-    }
-  
-    .bx--radio-button:focus + .bx--radio-button__label .bx--radio-button__appearance {
-      outline: none;
-      box-shadow: 0px 0px 4px 3px #4EC3CD;
-    }
-  
-    .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
-      background-color:#034D66;
-      transform: scale(0.585);
-    }
-
-    .bx--radio-button:hover + .bx--radio-button__label .bx--radio-button__appearance{
-      border-color: #034D66;
-    }
-
-    .bx--radio-button:disabled + .bx--radio-button__label .bx--radio-button__appearance, .bx--radio-button:disabled:checked + .bx--radio-button__label .bx--radio-button__appearance {
-      border-color: #B3B3B3;
-    }
-
-    .bx--radio-button:disabled + .bx--radio-button__label .bx--radio-button__appearance::before, .bx--radio-button:disabled:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
-      background-color: #B3B3B3;
-    }
-
-    :host(sdss-radio-button.bx--radio-invalid) .bx--radio-button__appearance::before{
-      background-color:#E50041;
-    }
-
-    :host(sdss-radio-button.bx--radio-invalid) .bx--radio-button__appearance{
-      border-color:#E50041;
-    }
-
-    :host(sdss-radio-button.bx--radio-invalid) .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance{
-      border-color:#E50041;
-    }
-
-    :host(sdss-radio-button.bx--radio-invalid) .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance:before {
-      background-color:#E50041;
-    }
-
-    :host(sdss-radio-button.bx--radio-invalid) .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance:focus {
-      box-shadow: 0px 0px 4px 3px #E50041;
-    }
-
-  `
-]
-
-customElements.define('my-radio-button', MyRadioButton)
+::slotted(*) {
+  background-color: #c6c6c6;
+}
 
 
-class MyRadioButtonGroup extends BXRadioButtonGroup {}
-MyRadioButtonGroup.styles = [
-  BXRadioButtonGroup.styles,
-  css`
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  grid-template-rows: 1em auto;
+  gap: 8px;
+}
 
-  .bx--radio-button-group {
-    font-family: Inter, sans-serif;
+.form-control + .form-control {
+  margin-top: 1em;
+}
+
+.form-control:focus-within {
+  color: var(--form-control-color);
+}
+
+input[type="radio"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="radio"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+
+    `;
   }
 
-  
 
-  `
-]
-customElements.define('my-radio-button-group', MyRadioButtonGroup)
+
+  render() {
+    return html`
+   
+    <label class="form-control">
+    <slot name="input"></slot>
+    <slot name="label"></slot>
+    ${this.invalid ? html`<span><span>` : ""}
+    <my-helper-text ?display=${this.invalid} error>${this.errorText}</my-helper-text> 
+    </label>
+
+    `;
+  }
+
+
+}
+
+customElements.define('my-radio', MyRadio)
+
+
+
+
+
+
+

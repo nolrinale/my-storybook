@@ -43,8 +43,6 @@ MyHelperText.styles = [
     font-size: 14px;
     display:flex;
     align-items: flex-start;
-    margin-top:8px;
-    padding-left:36px;
   }
 
   .otd--helper-text__icon {
