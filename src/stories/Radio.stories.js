@@ -65,20 +65,10 @@ export const DefaultMyRadio = (args) => html`
 
 <div class="story-container" style="display:flex;flex-direction:${args.horizontalAlign ? 'row' : 'column'}">
 
-    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
-      <input slot="input" type="radio" name="radio" value="YELLOW">
-      <label slot="label">Label Text Yellow</label>
-    </my-radio>
-    
-    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
-      <input slot="input" type="radio" name="radio" value="GREEN">
-      <label slot="label">Label Text Green</label>
-    </my-radio>
+  <my-radio value="Yellow" name="radio" label="My Label Yellow" ?invalid="${args.invalid}" errorText="${args.errorText}"></my-radio>
+  <my-radio value="Blue" name="radio" label="My Label Green" ?invalid="${args.invalid}" errorText="${args.errorText}"></my-radio>
+  <my-radio value="Green" name="radio" label="My Label Blue" ?invalid="${args.invalid}" errorText="${args.errorText}"></my-radio>
 
-    <my-radio ?invalid="${args.invalid}" errorText="${args.errorText}">
-    <input slot="input" type="radio" name="radio" value="BLUE">
-    <label slot="label">Label Text Blue</label>
-  </my-radio>
 
 </div>
 
