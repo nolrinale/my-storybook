@@ -7,17 +7,17 @@ export default {
 }
 
 export const DefaultCARBON = () => html`
-<bx-dropdown value="bar">
-  <bx-dropdown-item value="foo" disabled>Foo</bx-dropdown-item>
-  <bx-dropdown-item value="bar">Bar</bx-dropdown-item>
-  <bx-dropdown-item value="baz">Baz</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown value="bar">
+  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+</cds-dropdown>
 `
 
 export const DefaultMY = () => html`
 <my-dropdown value="bar">
-  <bx-dropdown-item value="foo" disabled>Foo</bx-dropdown-item>
-  <bx-dropdown-item value="bar">Bar</bx-dropdown-item>
-  <bx-dropdown-item value="baz">Baz</bx-dropdown-item>
+  <cds-dropdown-item value="foo" disabled>Foo</cds-dropdown-item>
+  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
 </my-dropdown>
 `

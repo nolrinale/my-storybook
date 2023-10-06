@@ -12,9 +12,11 @@ export class LightdomController  {
   hostConnected() {
     console.log(this.host);
     console.log("Controller Attached");
+    this.host.addEventListener('change', (e) => {console.log(e.target)})
   }
 
   hostDisconnected() {
+    this.host.removeEventListener('change');
     render(nothing);
   }
 
