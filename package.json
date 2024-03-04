@@ -11,19 +11,19 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@carbon/web-components": "^2.0.1",
+    "@carbon/web-components": "^2.4.0",
     "lit": "^3.0.0",
     "sass": "^1.63.6"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.5",
-    "@storybook/addon-links": "^7.6.5",
-    "@storybook/blocks": "^7.6.5",
-    "@storybook/web-components": "^7.6.5",
-    "@storybook/web-components-vite": "^7.6.5",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/web-components": "^7.6.17",
+    "@storybook/web-components-vite": "^7.6.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.6.5",
+    "storybook": "^7.6.17",
     "vite": "^4.5.0"
   }
 }
