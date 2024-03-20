@@ -1,5 +1,6 @@
 import { html } from 'lit';
-import '@carbon/web-components/es/components/dropdown/index.js';
+import '@carbon/web-components/es/components/dropdown/dropdown';
+import '@carbon/web-components/es/components/dropdown/dropdown-item';
 import './Dropdown.js';
 
 export default {
@@ -7,10 +8,12 @@ export default {
 }
 
 export const DefaultCARBON = () => html`
-<cds-dropdown value="bar">
-  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
-  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
-  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+<cds-dropdown trigger-content="Select an item">
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+  <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+  <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
 </cds-dropdown>
 `
 

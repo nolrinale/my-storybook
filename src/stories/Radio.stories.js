@@ -22,43 +22,19 @@ export default {
     }
 }
 
-export const DefaultCARBON = () => html`
-<bx-radio-button-group>
-<bx-radio-button>Radio 1</bx-radio-button>
-<bx-radio-button>Radio 2</bx-radio-button>
-<bx-radio-button>Radio 3</bx-radio-button>
-</bx-radio-button-group>
-`
-
-export const DefaultCarbonStatic = () => html`
-<fieldset class="bx--fieldset">
-	<legend class="bx--label">Radio button label</legend>
-	<div class="bx--form-item">
-		<div class="bx--radio-button-group ">
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-ka60q97rt-1" class="bx--radio-button" type="radio" value="red" name="radio-button" tabindex="0" checked>
-				<label for="radio-button-ka60q97rt-1" class="bx--radio-button__label">
-            <span class="bx--radio-button__appearance"></span>
-            <span class="bx--radio-button__label-text">Radio button label</span>
-          </label>
-			</div>
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-ka60q97rt-2" class="bx--radio-button" type="radio" value="green" name="radio-button" tabindex="0">
-				<label for="radio-button-ka60q97rt-2" class="bx--radio-button__label">
-            <span class="bx--radio-button__appearance"></span>
-            <span class="bx--radio-button__label-text">Radio button label</span>
-          </label>
-			</div>
-			<div class="bx--radio-button-wrapper">
-				<input id="radio-button-ka60q97rt-3" class="bx--radio-button" type="radio" value="blue" name="radio-button" tabindex="0" disabled>
-				<label for="radio-button-ka60q97rt-3" class="bx--radio-button__label">
-            <span class="bx--radio-button__appearance"></span>
-            <span class="bx--radio-button__label-text">Radio button label</span>
-          </label>
-			</div>
-		</div>
-	</div>
-</fieldset>
+export const DefaultCarbon = () => html`
+<cds-radio-button-group
+  label-position="right"
+  orientation="horizontal"
+  name="radio-group">
+  <cds-radio-button label-text="Radio button" value="all"></cds-radio-button>
+  <cds-radio-button
+    label-text="Radio button"
+    value="cloudFoundry"></cds-radio-button>
+  <cds-radio-button
+    label-text="Radio button"
+    value="staging"></cds-radio-button>
+</cds-radio-button-group>
 `
 
 export const DefaultMyRadio = (args) => html`

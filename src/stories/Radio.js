@@ -1,5 +1,4 @@
-import BXRadioButtonGroup from '@carbon/web-components/es/components/radio-button/radio-button-group';
-import BXRadioButton from '@carbon/web-components/es/components/radio-button/radio-button';
+import '@carbon/web-components/es/components/radio-button/index.js';
 import './helper-text';
 import { LitElement, css, html, nothing } from 'lit';
 import {LightdomController} from './lightdom-controller.js';
